@@ -9,6 +9,13 @@ namespace StudentApi.Controllers
   [Route("api/[controller]")]
   public class ProgressReportController : ControllerBase
   {
+    [HttpGet]
+    public ActionResult GetAllProgressReports()
+    {
+      var db = new DatabaseContext();
+      return Ok(db.ProgressReports.OrderBy(progressreport => progressreport.StudentId));
+    }
+
     [HttpPost]
     public ActionResult CreateProgressReport(NewProgressReportViewModel vm)
     {
