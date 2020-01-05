@@ -7,7 +7,11 @@ namespace StudentApi.Models
 {
   public partial class DatabaseContext : DbContext
   {
-
+    public DbSet<Student> Students { get; set; }
+    // this added a table called students with the structure of Student.cs
+    public DbSet<ProgressReport> ProgressReports { get; set; }
+    // this added a table called ProgressReports with the structure of
+    // ProgressReport.cs
     private string ConvertPostConnectionToConnectionString(string connection)
     {
       var _connection = connection.Replace("postgres://", String.Empty);
@@ -20,7 +24,6 @@ namespace StudentApi.Models
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-#warning Update this connection string to point to your own database.
         var conn = "server=localhost;database=StudentApiDatabase";
         if (envConn != null)
         {
